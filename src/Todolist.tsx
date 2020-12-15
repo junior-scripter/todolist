@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValuesType, TaskType} from "./App";
+import AddItemForm from "./AddItemForm";
 
 type PropsType = {
     id: string
@@ -16,8 +17,8 @@ type PropsType = {
 
 export function Todolist(props: PropsType) {
 
-    const [title, setTitle] = useState<string>("")
-    const [error, setError] = useState<string | null>(null)
+    /*const [title, setTitle] = useState<string>("")
+    const [error, setError] = useState<string | null>(null)*/
 
     const tasks = props.tasks.map(taskObj => {
         const removeTask = () => {
@@ -40,7 +41,7 @@ export function Todolist(props: PropsType) {
         )
     })
 
-    const addTask = () => {
+    /*const addTask = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle) {
             props.addTask(trimmedTitle, props.id)
@@ -49,15 +50,15 @@ export function Todolist(props: PropsType) {
             setError("Title is required!")
         }
         setTitle("")
-    }
+    }*/
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    /*const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setError(null)
         setTitle(e.currentTarget.value)
     }
     const onKeyPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") addTask()
-    }
+    }*/
     const onAllClickHandler = () => {
         props.changeFilter('all', props.id)
     }
@@ -68,10 +69,12 @@ export function Todolist(props: PropsType) {
         props.changeFilter('completed', props.id)
     }
     const removeTodolist = ()=>{props.removeTodoList(props.id)}
+    const addTask = (title: string) => {props.addTask(title, props.id)}
 
     return <div>
         <h3>{props.title}<button onClick={removeTodolist}>x</button></h3>
-        <div>
+        <AddItemForm addItem={addTask} />
+        {/*<div>
             <input
                 value={title}
                 onChange={onChangeHandler}// читаем из инпута, что написано пользователем
@@ -80,7 +83,7 @@ export function Todolist(props: PropsType) {
             />
             <button onClick={addTask}>+</button>
             {error && <div className={"error-message"}>{error}</div>}
-        </div>
+        </div>*/}
         <ul>
             {tasks}
         </ul>
