@@ -3,6 +3,8 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from 'uuid';
 import AddItemForm from "./AddItemForm";
+import {AppBar, Button, IconButton, Typography, Toolbar, Container, Grid, Paper} from "@material-ui/core";
+import {Menu} from "@material-ui/icons";
 
 export type TaskType = {
     id: string
@@ -137,7 +139,22 @@ function App() {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start"  color="inherit" aria-label="menu">
+                        <Menu />
+                    </IconButton>
+                    <Typography variant="h6" >
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Container fixed={true}>
+                <Grid container={true} style={{padding: "15px"}}>
             <AddItemForm addItem={addTodolist}/>
+                </Grid>
+                <Grid container={true} spacing={5}>
             {
                 todoLists.map(tl => {
                     let taskForTodolist = tasks[tl.id]
@@ -148,24 +165,29 @@ function App() {
                         taskForTodolist = tasks[tl.id].filter(task => task.isDone)
                     }
                     return (
-                        <Todolist
-                            key={tl.id}
-                            id={tl.id}
-                            title={tl.title}
-                            tasks={taskForTodolist}
-                            addTask={addTask}
-                            removeTask={removeTask}
-                            changeFilter={changeFilter}
-                            changeStatus={changeStatus}
-                            filter={tl.filter}
-                            removeTodoList={removeTodoList}
-                            changeTaskTitle={changeTaskTitle}
-                            changeTodolistTitle={changeTodolistTitle}
-                        />
+                        <Grid item>
+                            <Paper elevation={10} style={{padding: "15px", borderRadius: "10px"}}>
+                                <Todolist
+                                key={tl.id}
+                                id={tl.id}
+                                title={tl.title}
+                                tasks={taskForTodolist}
+                                addTask={addTask}
+                                removeTask={removeTask}
+                                changeFilter={changeFilter}
+                                changeStatus={changeStatus}
+                                filter={tl.filter}
+                                removeTodoList={removeTodoList}
+                                changeTaskTitle={changeTaskTitle}
+                                changeTodolistTitle={changeTodolistTitle}
+                            />
+                            </Paper>
+                        </Grid>
                     )
                 })
             }
-
+                </Grid>
+</Container>
         </div>
     );
 }

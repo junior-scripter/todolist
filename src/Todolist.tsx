@@ -81,10 +81,10 @@ export function Todolist(props: PropsType) {
             {/*<button onClick={removeTodolist}>x</button>*/}
         </h3>
         <AddItemForm addItem={addTask}/>
-        <ul>
+        <ul style={{listStyle: "none", paddingLeft: "0"}}>
             {tasks}
         </ul>
-        <div>
+        <div style={{textAlign: "center"}}>
             <ButtonGroup size={"small"} color={"primary"}>
             <Button
                 variant={props.filter === "all" ? "contained" : "outlined"}

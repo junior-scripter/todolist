@@ -27,7 +27,6 @@ function EditableSpan(props: EditableSpanPropsType) {
     return (
         editMode
             ? <TextField
-                variant={"outlined"}
                 value={title}
                 onBlur={offEditMode}
                 autoFocus={true}
