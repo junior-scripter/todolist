@@ -102,7 +102,6 @@ export function Todolist(props: PropsType) {
                 variant={props.filter === "completed" ? "contained" : "outlined"}
                 onClick={onCompletedClickHandler}
                 color={"secondary"}
-
             >Completed
             </Button>
         </ButtonGroup>
