@@ -22,7 +22,7 @@ export const userReducer = (state: StateType, action: ActionType) => {
         case 'CHANGE-NAME':
             return {...state, name: action.newName}
         default:
-            //return state
-            throw new Error("I don't understand this type")
+            return state
+            //throw new Error("I don't understand this type")
     }
 }

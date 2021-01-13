@@ -1,4 +1,5 @@
 import {
+    AddTodolistAC,
     ChangeTodolistFilterActionType,
     ChangeTodolistTitleActionType,
     RemoveTodolistAC,
@@ -7,33 +8,35 @@ import {
 import {v1} from 'uuid';
 import {FilterValuesType, TodoListType} from '../App'
 
-test('correct todolist should be removed', () => {
-    let todolistId1 = v1();
-    let todolistId2 = v1();
+let todolistId1: string
+let todolistId2: string
+let startState: Array < TodoListType > = []
 
-    const startState: Array<TodoListType> = [
+beforeEach(() => {
+     todolistId1 = v1();
+     todolistId2 = v1();
+
+     startState = [
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
+})
 
-    const endState = todolistsReducer(startState,  RemoveTodolistAC(todolistId1))
+test('correct todolist should be removed', () => {
+
+    const endState = todolistsReducer(startState, RemoveTodolistAC(todolistId1))
 
     expect(endState.length).toBe(1);
     expect(endState[0].id).toBe(todolistId2);
 });
 
 test('correct todolist should be added', () => {
-    let todolistId1 = v1();
-    let todolistId2 = v1();
 
     let newTodolistTitle = "New Todolist";
 
-    const startState: Array<TodoListType> = [
-        {id: todolistId1, title: "What to learn", filter: "all"},
-        {id: todolistId2, title: "What to buy", filter: "all"}
-    ]
 
-    const endState = todolistsReducer(startState, { type: 'ADD_TODOLIST', title: newTodolistTitle})
+
+    const endState = todolistsReducer(startState, AddTodolistAC(newTodolistTitle))
 
     expect(endState.length).toBe(3);
     expect(endState[2].title).toBe(newTodolistTitle);
@@ -42,17 +45,11 @@ test('correct todolist should be added', () => {
 // todolist меняет свой заголовок
 
 test('correct todolist should change its name', () => {
-    let todolistId1 = v1();
-    let todolistId2 = v1();
 
     let newTodolistTitle = "New Todolist";
 
-    const startState: Array<TodoListType> = [
-        {id: todolistId1, title: "What to learn", filter: "all"},
-        {id: todolistId2, title: "What to buy", filter: "all"}
-    ]
     const action: ChangeTodolistTitleActionType = {
-        type: 'CHANGE_TODOLIST_TITLE', // as const можно и так написать, но не варик
+        type: 'CHANGE-TODOLIST-TITLE', // as const можно и так написать, но не варик
         todoListID: todolistId2,
         title: newTodolistTitle
     };
@@ -64,18 +61,14 @@ test('correct todolist should change its name', () => {
 });
 
 test('correct filter of todolist should be changed', () => {
-    let todolistId1 = v1();
-    let todolistId2 = v1();
+
 
     let newFilter: FilterValuesType = "completed";
 
-    const startState: Array<TodoListType> = [
-        {id: todolistId1, title: "What to learn", filter: "all"},
-        {id: todolistId2, title: "What to buy", filter: "all"}
-    ]
+
 
     const action: ChangeTodolistFilterActionType = {
-        type: 'CHANGE_TODOLIST_FILTER',
+        type: 'CHANGE-TODOLIST-FILTER',
         todoListID: todolistId2,
         filter: newFilter
     };
