@@ -131,7 +131,6 @@ function  AppWithReducers() {
                                 key={tl.id}
                                 id={tl.id}
                                 title={tl.title}
-                                tasks={taskForTodolist}
                                 addTask={addTask}
                                 removeTask={removeTask}
                                 changeFilter={changeFilter}

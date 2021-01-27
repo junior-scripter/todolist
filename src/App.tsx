@@ -157,13 +157,13 @@ function App() {
                 <Grid container={true} spacing={5}>
             {
                 todoLists.map(tl => {
-                    let taskForTodolist = tasks[tl.id]
-                    if (tl.filter === 'active') {
-                        taskForTodolist = tasks[tl.id].filter(task => !task.isDone)
-                    }
-                    if (tl.filter === 'completed') {
-                        taskForTodolist = tasks[tl.id].filter(task => task.isDone)
-                    }
+                    // let taskForTodolist = tasks[tl.id]
+                    // if (tl.filter === 'active') {
+                    //     taskForTodolist = tasks[tl.id].filter(task => !task.isDone)
+                    // }
+                    // if (tl.filter === 'completed') {
+                    //     taskForTodolist = tasks[tl.id].filter(task => task.isDone)
+                    // }
                     return (
                         <Grid item>
                             <Paper elevation={10} style={{padding: "15px", borderRadius: "10px"}}>
@@ -171,7 +171,6 @@ function App() {
                                 key={tl.id}
                                 id={tl.id}
                                 title={tl.title}
-                                tasks={taskForTodolist}
                                 addTask={addTask}
                                 removeTask={removeTask}
                                 changeFilter={changeFilter}

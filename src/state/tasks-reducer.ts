@@ -60,7 +60,7 @@ export const tasksReducer = (state: TaskStateType = initialState, action: Action
                     } else {
                         return {...task, isDone: action.isDone}
                     }
-                })
+                }),
             }
         }
         case 'CHANGE-TASK-TITLE': {
